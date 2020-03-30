@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/triveacademy/internship-tutorial/issues"
   },
-  "homepage": "https://github.com/triveacademy/internship-tutorial#readme"
+  "homepage": "https://github.com/triveacademy/internship-tutorial#readme",
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1"
+  }
 }
