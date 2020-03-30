@@ -1,0 +1,28 @@
+{
+  "name": "@triveacademy/internship-tutorial",
+  "version": "1.0.0",
+  "description": "This is a tutorial demo for TriveAcademy Interns",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triveacademy/internship-tutorial.git"
+  },
+  "keywords": [
+    "internship",
+    "hapi",
+    "swagger",
+    "tutorial",
+    "jwt",
+    "postgresql",
+    "redis"
+  ],
+  "author": "jsheng08",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/triveacademy/internship-tutorial/issues"
+  },
+  "homepage": "https://github.com/triveacademy/internship-tutorial#readme"
+}
