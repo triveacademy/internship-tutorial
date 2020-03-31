@@ -26,6 +26,11 @@
   },
   "homepage": "https://github.com/triveacademy/internship-tutorial#readme",
   "dependencies": {
-    "@hapi/hapi": "^19.1.1"
+    "@hapi/hapi": "^19.1.1",
+    "assert": "^2.0.0",
+    "env2": "^2.2.2",
+    "hapi-pgsql": "^1.0.0",
+    "pg": "^8.0.0",
+    "pg-pool": "^3.0.0"
   }
 }
