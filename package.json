@@ -27,6 +27,7 @@
   "homepage": "https://github.com/triveacademy/internship-tutorial#readme",
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
+    "@hapi/joi": "^17.1.1",
     "env2": "^2.2.2",
     "hapi-auto-route": "^3.0.4",
     "hapi-pgsql": "^1.0.0"

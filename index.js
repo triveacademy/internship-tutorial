@@ -1,7 +1,6 @@
 'use strict'
-
+require('env2')('env.json')
 const Hapi = require('@hapi/hapi')
-const env = require('env2')('env.json')
 const Path = require('path')
 
 const init = async () => {

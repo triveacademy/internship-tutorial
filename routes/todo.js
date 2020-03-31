@@ -1,4 +1,5 @@
 'use strict';
+const Joi = require('@hapi/joi');
  
 module.exports = [{
     method: 'GET',
@@ -10,9 +11,16 @@ module.exports = [{
 },{
     method: 'GET',
     path: '/todo/{todo_id}',
+    options: {
+        validate: {
+            params: Joi.object({
+                todo_id: Joi.number().integer().required()
+            })
+        }
+    },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
-            `SELECT * FROM todo WHERE todo_id = %L LIMIT 1`, 
+            `SELECT * FROM todo WHERE todo_id = $1 LIMIT 1`, 
             [request.params.todo_id]
         )
         return todos.rows[0]
@@ -20,6 +28,13 @@ module.exports = [{
 },{
     method: 'PUT',
     path: '/todo',
+    options: {
+        validate: {
+            payload: Joi.object({
+                todo_title: Joi.string().required()
+            })
+        }
+    },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
             `INSERT INTO todo ("todo_title") VALUES ($1) RETURNING *;`,
@@ -30,6 +45,16 @@ module.exports = [{
 },{
     method: 'POST',
     path: '/todo/{todo_id}',
+    options: {
+        validate: {
+            params: Joi.object({
+                todo_id: Joi.number().integer().required()
+            }),
+            payload: Joi.object({
+                completed: Joi.boolean().required()
+            })
+        }
+    },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
             `UPDATE public.todo SET "completed" = $1 WHERE todo_id = $2 RETURNING *`, 
@@ -40,11 +65,20 @@ module.exports = [{
 },{
     method: 'DELETE',
     path: '/todo/{todo_id}',
+    options: {
+        validate: {
+            params: Joi.object({
+                todo_id: Joi.number().integer().required()
+            })
+        }
+    },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
             `DELETE FROM todo WHERE todo_id = $1`, 
             [request.params.todo_id]
         )
-        return todos.rows[0]
+        return {
+            deleted: (todos.rowCount == 1)
+        }
     }
 }];
