@@ -1,14 +1,19 @@
 'use strict';
 const Joi = require('@hapi/joi');
- 
+
 module.exports = [{
     method: 'GET',
     path: '/todos',
+    options: {
+        auth: {
+            scope: ['admin']
+        }
+    },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(`SELECT * FROM todo`)
         return todos.rows
     }
-},{
+}, {
     method: 'GET',
     path: '/todo/{todo_id}',
     options: {
@@ -20,12 +25,12 @@ module.exports = [{
     },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
-            `SELECT * FROM todo WHERE todo_id = $1 LIMIT 1`, 
+            `SELECT * FROM todo WHERE todo_id = $1 LIMIT 1`,
             [request.params.todo_id]
         )
         return todos.rows[0]
     }
-},{
+}, {
     method: 'PUT',
     path: '/todo',
     options: {
@@ -42,7 +47,7 @@ module.exports = [{
         )
         return todos.rows[0]
     }
-},{
+}, {
     method: 'POST',
     path: '/todo/{todo_id}',
     options: {
@@ -57,12 +62,12 @@ module.exports = [{
     },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
-            `UPDATE public.todo SET "completed" = $1 WHERE todo_id = $2 RETURNING *`, 
+            `UPDATE public.todo SET "completed" = $1 WHERE todo_id = $2 RETURNING *`,
             [request.payload.completed, request.params.todo_id]
         )
         return todos.rows[0]
     }
-},{
+}, {
     method: 'DELETE',
     path: '/todo/{todo_id}',
     options: {
@@ -74,7 +79,7 @@ module.exports = [{
     },
     handler: async (request, h) => {
         const todos = await request.pgsql.query(
-            `DELETE FROM todo WHERE todo_id = $1`, 
+            `DELETE FROM todo WHERE todo_id = $1`,
             [request.params.todo_id]
         )
         return {

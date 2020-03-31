@@ -9,6 +9,13 @@ const init = async () => {
     host: 'localhost'
   })
 
+  await server.register(require('hapi-auth-jwt2'))
+  server.auth.strategy('jwt', 'jwt', {
+    key: process.env.JWT_SECRET,
+    validate: require('./util/jwtValidate')
+  })
+  server.auth.default('jwt')
+
   await server.register([{
     plugin: require('hapi-pgsql'),
     options: {

@@ -29,7 +29,7 @@ CREATE TABLE "public"."staff" (
     "username" varchar NOT NULL,
     "password" varchar,
     "last_logon_dt" timestamp,
-    "user_type" int8,
+    "user_scope" varchar DEFAULT 'staff',
     "created_dt" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
     "updated_dt" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

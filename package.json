@@ -26,10 +26,14 @@
   },
   "homepage": "https://github.com/triveacademy/internship-tutorial#readme",
   "dependencies": {
+    "@hapi/boom": "^9.1.0",
     "@hapi/hapi": "^19.1.1",
     "@hapi/joi": "^17.1.1",
+    "bcrypt": "^4.0.1",
     "env2": "^2.2.2",
+    "hapi-auth-jwt2": "^10.0.0",
     "hapi-auto-route": "^3.0.4",
-    "hapi-pgsql": "^1.0.0"
+    "hapi-pgsql": "^1.0.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
