@@ -19,7 +19,7 @@ $$ LANGUAGE plpgsql;
 CREATE TABLE "public"."todo" (
     "todo_id" SERIAL PRIMARY KEY,
     "todo_title" varchar NOT NULL,
-    "completed" boolean,
+    "completed" boolean DEFAULT FALSE,
     "created_dt" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
     "updated_dt" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
