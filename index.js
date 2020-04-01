@@ -41,6 +41,12 @@ const init = async () => {
     }, {
       plugin: require('hapi-swagger'),
       options: swaggerOptions
+    }, {
+      plugin: require('hapi-redis2'),
+      options: {
+        settings: 'redis://127.0.0.1:6379/2',
+        decorate: true
+      }
     }
   ])
 
@@ -49,7 +55,7 @@ const init = async () => {
 
   server.events.on('log', (event, tags) => {
     console.log(event)
-});
+  });
 }
 
 process.on('unhandledRejection', (err) => {

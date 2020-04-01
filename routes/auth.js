@@ -40,6 +40,12 @@ module.exports = [{
             [checkUser.rows[0].staff_id, ipAddress]
         )
 
+        await request.redis.client.set(`session_${newSession.rows[0].session_id}`, JSON.stringify({ 
+            scope: checkUser.rows[0].user_scope, 
+            username: checkUser.rows[0].username,
+            staff_id: checkUser.rows[0].staff_id
+        }))
+
         const token = JWT.sign({ session_id: newSession.rows[0].session_id, scope: 'admin' }, process.env.JWT_SECRET);
         return {
             username: checkUser.rows[0].username,

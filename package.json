@@ -35,6 +35,7 @@
     "env2": "^2.2.2",
     "hapi-auth-jwt2": "^10.0.0",
     "hapi-pgsql": "^1.0.0",
+    "hapi-redis2": "^2.2.1",
     "hapi-router": "^4.0.1",
     "hapi-swagger": "^12.1.3",
     "jsonwebtoken": "^8.5.1"
