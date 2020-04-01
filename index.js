@@ -1,12 +1,13 @@
 'use strict'
 require('env2')('env.json')
 const Hapi = require('@hapi/hapi')
-const Path = require('path')
+const Pack = require('./package.json')
 
 const init = async () => {
   const server = Hapi.server({
     port: 3000,
-    host: 'localhost'
+    host: 'localhost',
+    debug: { request: ['error'] }
   })
 
   await server.register(require('hapi-auth-jwt2'))
@@ -16,20 +17,39 @@ const init = async () => {
   })
   server.auth.default('jwt')
 
-  await server.register([{
-    plugin: require('hapi-pgsql'),
-    options: {
-      database_url: process.env.DATABASE_URL
+  const swaggerOptions = {
+    info: {
+      title: 'Todo API Documentation',
+      version: Pack.version
     }
-  }, {
-    plugin: require('hapi-auto-route'),
-    options: {
-      routes_dir: Path.join(__dirname, 'routes')
+  }
+  await server.register([
+    {
+      plugin: require('@hapi/inert')
+    }, {
+      plugin: require('@hapi/vision')
+    }, {
+      plugin: require('hapi-pgsql'),
+      options: {
+        database_url: process.env.DATABASE_URL
+      }
+    }, {
+      plugin: require('hapi-router'),
+      options: {
+        routes: 'routes/*.js'
+      }
+    }, {
+      plugin: require('hapi-swagger'),
+      options: swaggerOptions
     }
-  }])
+  ])
 
   await server.start()
   console.log('Server running on %s', server.info.uri)
+
+  server.events.on('log', (event, tags) => {
+    console.log(event)
+});
 }
 
 process.on('unhandledRejection', (err) => {

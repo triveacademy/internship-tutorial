@@ -9,5 +9,5 @@ module.exports = async function (decoded, request, h) {
         return { isValid: false };
     }
 
-    return { isValid: true, credentials: { scope: findSessionID.rows[0].user_type, username: findSessionID.rows[0].username } };
+    return { isValid: true, credentials: { scope: findSessionID.rows[0].user_scope, username: findSessionID.rows[0].username } };
 };

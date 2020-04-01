@@ -5,8 +5,15 @@ module.exports = [{
     method: 'GET',
     path: '/todos',
     options: {
+        description: 'List all todos',
+        tags: ['api', 'todo'],
         auth: {
             scope: ['admin']
+        },
+        validate: {
+            headers: Joi.object({
+                'authorization': Joi.string().required()
+            }).unknown()
         }
     },
     handler: async (request, h) => {
@@ -17,7 +24,12 @@ module.exports = [{
     method: 'GET',
     path: '/todo/{todo_id}',
     options: {
+        description: 'Get a specific todo',
+        tags: ['api', 'todo'],
         validate: {
+            headers: Joi.object({
+                'authorization': Joi.string().required()
+            }).unknown(),
             params: Joi.object({
                 todo_id: Joi.number().integer().required()
             })
@@ -34,7 +46,12 @@ module.exports = [{
     method: 'PUT',
     path: '/todo',
     options: {
+        description: 'Add a new todo',
+        tags: ['api', 'todo'],
         validate: {
+            headers: Joi.object({
+                'authorization': Joi.string().required()
+            }).unknown(),
             payload: Joi.object({
                 todo_title: Joi.string().required()
             })
@@ -51,7 +68,12 @@ module.exports = [{
     method: 'POST',
     path: '/todo/{todo_id}',
     options: {
+        description: 'Update the completed status of a todo',
+        tags: ['api', 'todo'],
         validate: {
+            headers: Joi.object({
+                'authorization': Joi.string().required()
+            }).unknown(),
             params: Joi.object({
                 todo_id: Joi.number().integer().required()
             }),
@@ -71,7 +93,12 @@ module.exports = [{
     method: 'DELETE',
     path: '/todo/{todo_id}',
     options: {
+        description: 'Delete a todo',
+        tags: ['api', 'todo'],
         validate: {
+            headers: Joi.object({
+                'authorization': Joi.string().required()
+            }).unknown(),
             params: Joi.object({
                 todo_id: Joi.number().integer().required()
             })
