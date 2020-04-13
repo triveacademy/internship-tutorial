@@ -4,7 +4,7 @@
   "description": "This is a tutorial demo for TriveAcademy Interns",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "lint": "eslint routes/**/*.js util/**/*.js index.js --color",
     "lint:fix": "eslint routes/**/*.js util/**/*.js index.js --fix"
   },
