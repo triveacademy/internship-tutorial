@@ -7,47 +7,52 @@ const init = async () => {
   const server = Hapi.server({
     port: 3000,
     host: 'localhost',
-    debug: { request: ['error'] }
+    debug: { request: ['error'] },
   })
 
   await server.register(require('hapi-auth-jwt2'))
   server.auth.strategy('jwt', 'jwt', {
     key: process.env.JWT_SECRET,
-    validate: require('./util/jwtValidate')
+    validate: require('./util/jwtValidate'),
   })
   server.auth.default('jwt')
 
   const swaggerOptions = {
     info: {
       title: 'Todo API Documentation',
-      version: Pack.version
-    }
+      version: Pack.version,
+    },
   }
   await server.register([
     {
-      plugin: require('@hapi/inert')
-    }, {
-      plugin: require('@hapi/vision')
-    }, {
+      plugin: require('@hapi/inert'),
+    },
+    {
+      plugin: require('@hapi/vision'),
+    },
+    {
       plugin: require('hapi-pgsql'),
       options: {
-        database_url: process.env.DATABASE_URL
-      }
-    }, {
+        database_url: process.env.DATABASE_URL,
+      },
+    },
+    {
       plugin: require('hapi-router'),
       options: {
-        routes: 'routes/*.js'
-      }
-    }, {
+        routes: 'routes/*.js',
+      },
+    },
+    {
       plugin: require('hapi-swagger'),
-      options: swaggerOptions
-    }, {
+      options: swaggerOptions,
+    },
+    {
       plugin: require('hapi-redis2'),
       options: {
         settings: 'redis://127.0.0.1:6379/2',
-        decorate: true
-      }
-    }
+        decorate: true,
+      },
+    },
   ])
 
   await server.start()
@@ -55,7 +60,7 @@ const init = async () => {
 
   server.events.on('log', (event, tags) => {
     console.log(event)
-  });
+  })
 }
 
 process.on('unhandledRejection', (err) => {
