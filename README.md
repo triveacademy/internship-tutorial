@@ -1,4 +1,5 @@
 # TriveAcademy Internship Tutorial
+[![Build Status](https://travis-ci.org/triveacademy/internship-tutorial.svg?branch=master)](https://travis-ci.org/triveacademy/internship-tutorial)
 
 In this tutorial, our aim is to include:
 1. HapiJS as the base framework of the project
