@@ -10,3 +10,5 @@ In this tutorial, our aim is to include:
 7. Implement roles for different paths
 8. Implement Hapi Swagger for the APIs
 9. Use Redis to handle the session instead of calling postgresql constantly
+10. Added ESlint and Prettier to ensure code structure standard
+11. Introduce Travis to compile and run lint
